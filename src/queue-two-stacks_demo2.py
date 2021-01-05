@@ -23,12 +23,31 @@ class Stack:
 class QueueTwoStacks:
     def __init__(self):
         # Your code here
+        self.input_stack = Stack()
+        self.output_stack = Stack()
 
         
     def enqueue(self, item):
         # Your code here
+        self.input_stack.push(item)
 
 
     def dequeue(self):
         # Your code here
+        # return values from the output stack
+        # if the output stack is empty, fill it with values from the input stack
+        if len(self.output_stack.data) == 0:
+            while len(self.input_stack.data) > 0:
+                # pop from the input-stack and push onto the the output-stack
+                cur_item = self.input_stack.pop()
+                self.output_stack.push(cur_item)
+
+        # if there are items in the output stack, pop one off
+        if len(self.output_stack.data) == 0:
+            return None
+        return self.output_stack.pop()
+
+        self.input_stack.pop()
+
+
 
