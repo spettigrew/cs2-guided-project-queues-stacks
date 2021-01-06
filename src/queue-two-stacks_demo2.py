@@ -21,7 +21,7 @@ class Stack:
             return self.data.pop()
         return "The stack is empty"
 
-class QueueTwoStacks:
+class QueueTwoStacks:   # Runtime - O(1) constant* *amortized (avgerage worst case)
     def __init__(self):
         # Your code here
         self.input_stack = Stack()      # left stack    
@@ -53,6 +53,29 @@ class QueueTwoStacks:
         return self.output_stack.pop()
 
         self.input_stack.pop()
+
+# ----------- Glenna's lecture notes ---------------------
+class QueueTwoStacks2:
+    def __init__(self):
+        # Your code here
+        self.stack1 = Stack()
+        self.stack2 = Stack()
+
+    def enqueue(self, item):
+        # Your code here
+        self.stack1.push(item)
+
+    def dequeue(self):
+        # Your code here
+        if len(self.stack1.data) != 0:
+            shifted = self.stack1.pop()
+            self.stack2.push(shifted)
+            return self.dequeue()
+        else:
+            if len(self.stack2.data) != 0:
+                last_item = self.stack2.pop()
+                return last_item
+
 
         
 my_queue = QueueTwoStacks()
